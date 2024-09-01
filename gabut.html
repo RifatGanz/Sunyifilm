@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soutore - WhatsApp Shop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4e4c67;
+            --secondary-color: #8892b0;
+            --accent-color: #64ffda;
+            --text-color: #1c1c1e;
+            --background-color: #f0f4f8;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--background-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-title {
+            font-weight: 700;
+            margin: 0;
+            font-size: 2.2em; /* Ukuran teks yang lebih kecil */
+            line-height: 1.2;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1.2s forwards 0.5s;
+        }
+
+        .header-subtitle {
+            font-size: 1em; /* Ukuran teks yang lebih kecil */
+            margin-top: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1.2s forwards 0.7s;
+        }
+
+        .header-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .header-bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            animation: bubbleFloat 25s infinite linear;
+        }
+
+        @keyframes bubbleFloat {
+            0% {
+                transform: translateY(100%) translateX(-50%) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100%) translateX(50%) scale(1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .sponsor-slider {
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+            overflow: hidden;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .sponsor-slider img {
+            width: 120px;
+            margin: 0 30px;
+            transition: transform 0.4s ease;
+            filter: grayscale(100%);
+        }
+
+        .sponsor-slider img:hover {
+            transform: scale(1.1);
+            filter: grayscale(0%);
+        }
+
+        .sponsor-slider-track {
+            display: flex;
+            animation: scroll 15s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        main {
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .product {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .product img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.4s ease;
+        }
+
+        .product:hover img {
+            transform: scale(1.05);
+        }
+
+        .product h3 {
+            margin: 20px 0 15px;
+            font-size: 1.5em; /* Sesuaikan ukuran teks */
+            color: var(--primary-color);
+        }
+
+        .product p {
+            color: #555;
+            font-size: 1em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .buy-button {
+            background: linear-gradient(135deg, var(--accent-color), #00c4b3);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .buy-button:hover {
+            background: linear-gradient(135deg, #00c4b3, #007b6b);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .whatsapp-button {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            padding: 18px;
+            border-radius: 50%;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            font-size: 28px; /* Ukuran ikon yang lebih kecil */
+            transition: all 0.4s ease;
+            animation: pulse 2.5s infinite;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        .decoration {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .decoration-1 {
+            top: 15%;
+            left: 5%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .decoration-2 {
+            bottom: 15%;
+            right: 5%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-background"></div>
+    <div class="header-content">
+        <h1 class="header-title">Welcome to Soutore</h1>
+        <p class="header-subtitle">Your One-Stop WhatsApp Shop</p>
+    </div>
+</header>
+
+<div class="sponsor-slider">
+    <div class="sponsor-slider-track">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Tencent_Logo.svg" alt="Tencent Logo">
+        <img src="https://telegra.ph/file/259e11934519ad4a5804d.jpg" alt="Microsoft Logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google Logo">
+        <img src="https://telegra.ph/file/0c41edd881bf3d54f2fc5.jpg" alt="Intel Logo">
+    </div>
+</div>
+
+<main>
+    <div class="product">
+        <img src="https://telegra.ph/file/98e193fc3adf17fb92182.jpg" alt="Product Image">
+        <h3>Script button premium</h3>
+        <p>Ada harga ada kualitas cuyh,fitur yang dihadirkan juga sudah menggunakan openai 4o dan sudah support pembuatan gambar dengan dalle🤩👌</p>
+        <a href="https://wa.me/6285779127761?text=Halo,%20saya%20ingin%20membeli%20Premium%20Script%20Button" class="buy-button">Buy via WhatsApp</a>
+    </div>
+
+    <div class="product">
+        <img src="https://telegra.ph/file/a85c46eb0775ea576aa09.jpg" alt="Product Image">
+        <h3>Script S+ 22-23</h3>
+        <p>Script semi old nih,tapi kualias bisa kali diadu hehe😏</p>
+        <a href="https://wa.me/6285779127761?text=Halo,%20saya%20ingin%20membeli%%20Script%20S+%2022-23" class="buy-button">Buy via WhatsApp</a>
+    </div>
+
+    <div class="product">
+        <img src="https://telegra.ph/file/e46c5ce6010e295e8258b.jpg" alt="Product Image">
+        <h3>Script old</h3>
+        <p>Harga murah,kualitas jangan ditanya🤩</p>
+        <a href="https://wa.me/6285779127761?text=Halo,%20saya%20ingin%20membeli%20Script%20Old" class="buy-button">Buy via WhatsApp</a>
+    </div>
+</main>
+
+<a href="https://wa.me/6285779127761?text=Halo,%20apakah%20anda%20developer?" class="whatsapp-button">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<svg class="decoration decoration-1" width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="45" fill="none" stroke="#4e4c67" stroke-width="5"/>
+    <path d="M50 25 L50 75 M25 50 L75 50" stroke="#4e4c67" stroke-width="5"/>
+</svg>
+
+<svg class="decoration decoration-2" width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <rect x="10" y="10" width="100" height="100" fill="none" stroke="#64ffda" stroke-width="5" rx="20" ry="20"/>
+    <circle cx="60" cy="60" r="30" fill="none" stroke="#64ffda" stroke-width="5"/>
+</svg>
+
+<script>
+    function createBubbles() {
+        const headerBackground = document.querySelector('.header-background');
+        const bubbleCount = 15;
+
+        for (let i = 0; i < bubbleCount; i++) {
+            const bubble = document.createElement('div');
+            bubble.classList.add('header-bubble');
+            
+            const size = Math.random() * 60 + 20;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            
+            bubble.style.left = `${Math.random() * 100}%`;
+            bubble.style.animationDuration = `${Math.random() * 10 + 15}s`;
+            bubble.style.animationDelay = `${Math.random() * 10}s`;
+            
+            headerBackground.appendChild(bubble);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', createBubbles);
+</script>
+
+</body>
+</html>
